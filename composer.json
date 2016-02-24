@@ -1,0 +1,31 @@
+{
+  "name" : "magium/mailchimp",
+  "type": "library",
+  "description": "A Magium module for validating MailChimp integration. Note - this is a community project; it is not supported by Mailchimp ",
+  "keywords": ["mailchimp", "selenium", "webdriver", "testing"],
+  "homepage": "http://www.magiumlib.com/",
+  "license": "ASL-2.0",
+  "authors": [
+    {
+      "name": "Kevin Schroeder",
+      "email": "kschroeder@mirageworks.com",
+      "homepage": "http://magiumlib.com/",
+      "role": "Developer"
+    }
+  ],
+  "require" : {
+    "magium/magium": ">=0.0.51 <2.0.0"
+  },
+  "repositories" : [ {
+    "type" : "composer",
+    "url" : "https://packagist.org/"
+  } ],
+  "autoload" : {
+    "psr-4" : {
+      "Magium\\MailChimp\\" : "lib/"
+    },
+    "files": [
+      "register.php"
+    ]
+  }
+}
