@@ -8,8 +8,12 @@ class Subscribed extends AbstractSubscribed
 
     public function finalize()
     {
-        $this->subscriber->navigateTo($this->email);
-        return true;
+        try {
+            $this->subscriber->navigateTo($this->email);
+            return true;
+        } catch (\Exception $e) {
+            $this->testCase->fail('The email address is not subscribed: ' . $this->email);
+        }
     }
 
 }
