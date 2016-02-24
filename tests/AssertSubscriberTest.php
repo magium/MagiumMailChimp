@@ -19,7 +19,7 @@ class AssertSubscriberTest extends AbstractTestCase
         /* @var $assertion Subscribed */
         $assertion->setEmail('kschroeder@mirageworks.com');
         $assertion->setList('Magium');
-        self::assertTrue($assertion->assert());
+        $assertion->assert();
     }
 
     public function testNotSubscribedTest()
@@ -28,7 +28,7 @@ class AssertSubscriberTest extends AbstractTestCase
         /* @var $assertion Subscribed */
         $assertion->setEmail('boogers@mirageworks.com');
         $assertion->setList('Magium');
-        self::assertTrue($assertion->assert());
+        $assertion->assert();
     }
 
 }
