@@ -31,4 +31,13 @@ class AssertSubscriberTest extends AbstractTestCase
         $assertion->assert();
     }
 
+    public function testCreatedButNotSubscribedTest()
+    {
+        $assertion = $this->getAssertion(NotSubscribed::ASSERTION);
+        /* @var $assertion NotSubscribed */
+        $assertion->setEmail('test@mirageworks.com');
+        $assertion->setList('Magium');
+        $assertion->assert();
+    }
+
 }

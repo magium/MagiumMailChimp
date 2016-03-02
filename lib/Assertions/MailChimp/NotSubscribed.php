@@ -12,11 +12,13 @@ class NotSubscribed extends AbstractSubscribed
     {
         try {
             $this->subscriber->navigateTo($this->email);
-            $this->testCase->fail('The email address is subscribed: ' . $this->email);
+            $this->testCase->assertFalse($this->subscriber->isSubscribed());
+            if ($this->subscriber->isSubscribed()) {
+                $this->testCase->fail('The email address is subscribed: ' . $this->email);
+            }
         } catch (SubscriberNotFoundException $e) {
-            return true;
         }
-
+        return true;
     }
 
 }

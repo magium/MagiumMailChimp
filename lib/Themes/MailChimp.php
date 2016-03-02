@@ -36,6 +36,18 @@ class MailChimp extends AbstractConfigurableElement implements ThemeConfiguratio
 
     public $subscriberDetailsSelectorXpath = '//ul[@class="dotted-list"]/descendant::p[contains(concat(" ",normalize-space(@class)," ")," fwb ") and .="%s"]/../p[2]';
 
+    public $unsubscribedSearchResultXpath = '//div[@id="search-results-data"]/descendant::span[.="Unsubscribed"]';
+
+    /**
+     * @return string
+     */
+    public function getUnsubscribedSearchResultXpath()
+    {
+        return $this->unsubscribedSearchResultXpath;
+    }
+
+    
+
     /**
      * @return string
      */
