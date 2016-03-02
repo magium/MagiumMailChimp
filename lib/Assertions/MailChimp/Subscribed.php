@@ -10,6 +10,7 @@ class Subscribed extends AbstractSubscribed
     {
         try {
             $this->subscriber->navigateTo($this->email);
+            $this->testCase->assertTrue($this->subscriber->isSubscribed());
             return true;
         } catch (\Exception $e) {
             $this->testCase->fail('The email address is not subscribed: ' . $this->email);

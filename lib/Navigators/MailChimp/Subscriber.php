@@ -16,6 +16,7 @@ class Subscriber
     protected $theme;
     protected $loaded;
     protected $testCase;
+    protected $subscribed;
 
     public function __construct(
         WebDriver $webDriver,
@@ -27,6 +28,11 @@ class Subscriber
         $this->theme        = $theme;
         $this->loaded       = $loaded;
         $this->testCase     = $testCase;
+    }
+
+    public function isSubscribed()
+    {
+        return $this->subscribed;
     }
 
     public function navigateTo($emailAddress)
@@ -41,6 +47,7 @@ class Subscriber
             $this->webDriver->wait(5)->until(ExpectedCondition::elementExists($this->theme->getListSearchViewProfileLinkXpath(), WebDriver::BY_XPATH));
             $element = $this->webDriver->byXpath($this->theme->getListSearchViewProfileLinkXpath());
             $this->webDriver->wait(5)->until(ExpectedCondition::visibilityOf($element));
+            $this->subscribed = !$this->webDriver->elementDisplayed($this->theme->getUnsubscribedSearchResultXpath(), WebDriver::BY_XPATH);
         } catch (\Exception $e) {
             throw new SubscriberNotFoundException('The subscriber could not be found: ' . $emailAddress);
         }
