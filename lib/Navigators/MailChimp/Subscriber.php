@@ -53,10 +53,10 @@ class Subscriber
                 $this->subscribed = !$this->webDriver->elementDisplayed($this->theme->getUnsubscribedSearchResultXpath(), WebDriver::BY_XPATH);
                 break;
             } catch (\Exception $e) {
-                if ($count++ > 9) {
+                if ($count++ > 6) {
                     throw new SubscriberNotFoundException('The subscriber could not be found: ' . $emailAddress);
                 } else {
-                    $this->testCase->sleep('1s');
+                    $this->testCase->sleep('10s');
                 }
             }
         }
