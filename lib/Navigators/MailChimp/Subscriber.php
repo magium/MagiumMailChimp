@@ -41,15 +41,24 @@ class Subscriber
         $element = $this->webDriver->byXpath($this->theme->getListSearchSearchInputXpath());
         $this->webDriver->wait()->until(ExpectedCondition::visibilityOf($element));
 //        $this->testCase->sleep('1s'); // Give the animation time...
-        $element->clear()->sendKeys($emailAddress);
-        $this->webDriver->byXpath($this->theme->getListSearchSubmitXpath())->click();
-        try {
-            $this->webDriver->wait(5)->until(ExpectedCondition::elementExists($this->theme->getListSearchViewProfileLinkXpath(), WebDriver::BY_XPATH));
-            $element = $this->webDriver->byXpath($this->theme->getListSearchViewProfileLinkXpath());
-            $this->webDriver->wait(5)->until(ExpectedCondition::visibilityOf($element));
-            $this->subscribed = !$this->webDriver->elementDisplayed($this->theme->getUnsubscribedSearchResultXpath(), WebDriver::BY_XPATH);
-        } catch (\Exception $e) {
-            throw new SubscriberNotFoundException('The subscriber could not be found: ' . $emailAddress);
+        $count = 0;
+        while (true) {
+            try {
+                $element->clear()->sendKeys($emailAddress);
+                $this->webDriver->byXpath($this->theme->getListSearchSubmitXpath())->click();
+
+                $this->webDriver->wait(5)->until(ExpectedCondition::elementExists($this->theme->getListSearchViewProfileLinkXpath(), WebDriver::BY_XPATH));
+                $element = $this->webDriver->byXpath($this->theme->getListSearchViewProfileLinkXpath());
+                $this->webDriver->wait(5)->until(ExpectedCondition::visibilityOf($element));
+                $this->subscribed = !$this->webDriver->elementDisplayed($this->theme->getUnsubscribedSearchResultXpath(), WebDriver::BY_XPATH);
+                break;
+            } catch (\Exception $e) {
+                if ($count++ > 9) {
+                    throw new SubscriberNotFoundException('The subscriber could not be found: ' . $emailAddress);
+                } else {
+                    $this->testCase->sleep('1s');
+                }
+            }
         }
         $body = $this->webDriver->byXpath('//body');
         $element->click();
