@@ -1,7 +1,7 @@
 # MagiumMailChimp
 A Magium module for validating MailChimp integration.  Note - this is a community project; it is not supported by Mailchimp
 
-More information can be found at [Magiumlib.com](http://magiumlib.com/)
+[Find much more information at magiumlib.com](http://www.magiumlib.com/?utm_source=github&utm_medium=website&utm_campaign=social)
 
 ## Installation
 
